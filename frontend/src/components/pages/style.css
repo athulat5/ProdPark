@@ -1,0 +1,20 @@
+
+@keyframes zoom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  .zooming-link {
+    display: inline-block;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 0.35rem;
+    margin-top: 12.5rem; /* Add margin to move the link down */
+    animation: zoom 1s infinite; /* Apply the zooming animation */
+  }
+  
