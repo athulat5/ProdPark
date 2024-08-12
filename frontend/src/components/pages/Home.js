@@ -1,5 +1,5 @@
-// src/pages/Home.js
 import React from 'react';
+import { Link } from 'react-router-dom';
 import bg3 from '../images/bg3.jpg'; 
 import './style.css'; 
 
@@ -17,7 +17,7 @@ function Home() {
 
   return (
     <div style={homeStyle}>
-       <a href="Home2.js" className="zooming-link">Explore</a>
+      <Link to="/home2" className="zooming-link">Explore</Link>
     </div>
   );
 }
