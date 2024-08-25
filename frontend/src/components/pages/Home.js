@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import bg3 from '../images/bg3.jpg'; 
+import bg3 from '../images/prodpark.jpg'; 
 import './style.css'; 
 
 function Home() {
