@@ -1,36 +1,40 @@
 import React from 'react';
-import bg from '../images/prodpark1.jpg';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import bg from './../images/home.jpg';
 
-const Background = () => {
-  const backgroundStyle = {
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh',
-    width: '100vw',
-  };
+const homeStyle = {
+  backgroundImage: `url(${bg})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  height: '100vh',
+  width: '100vw',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
-  return( <div style={backgroundStyle}>
-    <CustomNavbar></CustomNavbar>
-  </div>
-  );
-}
-  function CustomNavbar() {
+function CustomNavbar() {
   return (
-  <Navbar bg="light" data-bs-theme="light">
+    <>
+      <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">ProdPark</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Login</Nav.Link>
-            <Nav.Link href="#pricing">Register</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/About">About</Nav.Link>
+            <Nav.Link as={Link} to="/features">Features</Nav.Link>
+            <Nav.Link as={Link} to="/pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
+      <div style={homeStyle}>
+        
+      </div>
+    </>
   );
 }
 
-export default Background;
+export default CustomNavbar;

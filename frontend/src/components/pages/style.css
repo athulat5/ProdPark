@@ -18,3 +18,28 @@
     animation: zoom 1s infinite; /* Apply the zooming animation */
   }
   
+  /* src/pages/About.css */
+.about-container {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: rgba(0, 0, 0, 0.7); /* Adds a dark overlay to make text readable */
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-container h1, .about-container h2 {
+  color: #f8f9fa; /* Light color for headings */
+}
+
+.about-container p, .about-container li {
+  color: #e2e2e2; /* Light color for text */
+  font-size: 1.1rem;
+}
+
+.about-container ul {
+  margin-left: 20px;
+}
