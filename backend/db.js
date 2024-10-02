@@ -1,16 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect('mongodb://localhost:27017/pordpark', { // Use the correct database name
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected successfully');
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
-  }
-};
+const connectDatabase = ()=>{
+    mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true
+        }).then((data)=>{
+            console.log(`Mogodb connected with the server: ${data.connection.host}`);
+        });
+}
 
-module.exports = connectDB;
+module.exports = connectDatabase;
+

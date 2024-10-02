@@ -6,6 +6,8 @@ import About from './components/pages/About';
 
 import LoginPage from './components/pages/Login';
 import AdminDashboard from './components/pages/Admindashboard';
+import ClientRegistration from './components/pages/Client/ClientReg';
+import CompanyRegistration from './components/pages/Industry/Reg';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/Login" element={<LoginPage />} />    
         <Route path="/Admindashboard" element={<AdminDashboard />} />  
+        <Route path="/clientReg" element={<ClientRegistration />} />
+        <Route path="/Reg" element={<CompanyRegistration />} />
 
       </Routes>
     </Router>
