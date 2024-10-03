@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 // Login Admin
 exports.loginAdmin = async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const admin = await Admin.findOne({ username });
     if (!admin) return res.status(400).send('Admin not found');

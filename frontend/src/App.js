@@ -8,6 +8,7 @@ import LoginPage from './components/pages/Login';
 import AdminDashboard from './components/pages/Admindashboard';
 import ClientRegistration from './components/pages/Client/ClientReg';
 import CompanyRegistration from './components/pages/Industry/Reg';
+import StaffRegistration from './components/pages/Staff/Staffreg'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Admindashboard" element={<AdminDashboard />} />  
         <Route path="/clientReg" element={<ClientRegistration />} />
         <Route path="/Reg" element={<CompanyRegistration />} />
+        <Route path="/Staffreg" element={<StaffRegistration />} />
 
       </Routes>
     </Router>

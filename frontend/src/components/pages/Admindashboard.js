@@ -18,7 +18,7 @@ function AdminDashboard() {
         <Container>
           <Navbar.Brand href="#home">Admin Dashboard</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/admin/add-staff">Add Staff</Nav.Link>
+            <Nav.Link as={Link} to='/Staffreg'>Add Staff</Nav.Link>
             <Nav.Link as={Link} to="/admin/view-companies">View Companies</Nav.Link>
             <Nav.Link as={Link} to="/admin/view-complaints">View Complaints</Nav.Link>
           </Nav>

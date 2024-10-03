@@ -1,120 +1,205 @@
 import React, { useState } from 'react';
-import './StaffRegistrationForm.css'; // CSS file for styling
+import { useNavigate } from 'react-router-dom';
+import { Form, Button, Alert } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import bgImage from './../../images/home.jpg';
 
-const StaffRegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    position: '',
-    department: '',
-    password: '',
-    confirmPassword: '',
-  });
-  const [error, setError] = useState('');
+const backgroundStyle = {
+  backgroundImage: `url(${bgImage})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'repeat', 
+  height: '100vh',
+  width: '100vw',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  position: 'relative',
+  paddingTop: '50px',
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
-  const validateForm = () => {
-    const { email, phone, password, confirmPassword } = formData;
-    if (Object.values(formData).some(field => field === '')) {
-      setError('Please fill in all fields');
-      return false;
-    }
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return false;
-    }
-    if (phone.length < 10) {
-      setError('Phone number should be at least 10 digits');
-      return false;
-    }
-    setError('');
-    return true;
-  };
+const formContainerStyle = {
+  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  padding: '20px',
+  borderRadius: '10px',
+  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+  zIndex: 2,
+  width: '400%',
+  maxWidth: '500px',
+};
+
+const backButtonStyle = {
+  position: 'absolute',
+  top: '20px',
+  left: '20px',
+  backgroundColor: '#007bff',
+  border: 'none',
+  color: '#fff',
+  padding: '10px 15px',
+  fontSize: '16px',
+  cursor: 'pointer',
+  borderRadius: '5px',
+  zIndex: 3,
+};
+
+const StaffRegistration = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [photo, setPhoto] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    setError(null);
 
-    // Simulate a successful registration request
-    console.log('Staff registered:', formData);
-    alert('Staff registration successful!');
-    // Here you can send the formData to your backend API
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
 
-    // Reset the form
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      position: '',
-      department: '',
-      password: '',
-      confirmPassword: '',
-    });
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('mobileNumber', mobileNumber);
+    formData.append('password', password);
+    formData.append('confirmPassword', confirmPassword);
+    formData.append('photo', photo);
+
+    try {
+      const response = await fetch(`http://localhost:4000/api/staff/register`, {
+        method: 'POST',
+        body: formData,
+      });
+      
+      
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        navigate('/login');
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Server error, please try again later.');
+    }
   };
 
+  const handleReset = () => {
+    setUsername('');
+    setEmail('');
+    setMobileNumber('');
+    setPassword('');
+    setConfirmPassword('');
+    setPhoto(null);
+    setError(null);
+  };
+
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
+  const validateMobileNumber = (number) => /^[0-9]{10}$/.test(number);
+
   return (
-    <div className="staff-registration">
-      <h2>Staff Registration</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Full Name</label>
-          <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
-        </div>
+    <div style={backgroundStyle}>
+      <button style={backButtonStyle} onClick={() => navigate('/home2')}>
+        Back to Home
+      </button>
+      <div style={formContainerStyle}>
+        <Form onSubmit={handleSubmit}>
+          <h2 className="text-center mb-4">Staff Registration</h2>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-        </div>
+          {error && <Alert variant="danger">{error}</Alert>}
 
-        <div className="form-group">
-          <label>Phone</label>
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
-        </div>
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Position</label>
-          <input type="text" name="position" value={formData.position} onChange={handleChange} required />
-        </div>
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              isInvalid={email && !validateEmail(email)}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter a valid email address.
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Department</label>
-          <input type="text" name="department" value={formData.department} onChange={handleChange} required />
-        </div>
+          <Form.Group className="mb-3">
+            <Form.Label>Mobile Number</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter mobile number"
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+              isInvalid={mobileNumber && !validateMobileNumber(mobileNumber)}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter a valid 10-digit mobile number.
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-        </div>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-        </div>
+          <Form.Group className="mb-3">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              isInvalid={confirmPassword && password !== confirmPassword}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Passwords do not match.
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <div className="form-actions">
-          <button type="submit">Register</button>
-          <button type="reset" onClick={() => setFormData({
-            fullName: '',
-            email: '',
-            phone: '',
-            position: '',
-            department: '',
-            password: '',
-            confirmPassword: '',
-          })}>Reset</button>
-        </div>
-      </form>
+          <Form.Group className="mb-3">
+            <Form.Label>Photo</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={(e) => setPhoto(e.target.files[0])}
+              required
+            />
+          </Form.Group>
+
+          <Button variant="primary" type="submit" className="w-100 mb-3">
+            Register
+          </Button>
+          <Button variant="secondary" type="button" onClick={handleReset} className="w-100">
+            Reset
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };
 
-export default StaffRegistrationForm;
+export default StaffRegistration;
