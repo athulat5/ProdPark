@@ -8,7 +8,7 @@ const backgroundStyle = {
   backgroundImage: `url(${bgImage})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  backgroundRepeat: 'repeat', 
+  backgroundRepeat: 'no-repeat', 
   height: '100vh',
   width: '100vw',
   display: 'flex',
@@ -18,14 +18,13 @@ const backgroundStyle = {
   paddingTop: '50px',
 };
 
-
 const formContainerStyle = {
   backgroundColor: 'rgba(255, 255, 255, 0.9)',
   padding: '20px',
   borderRadius: '10px',
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
   zIndex: 2,
-  width: '400%',
+  width: '90%', // Adjusted width for better responsiveness
   maxWidth: '500px',
 };
 
@@ -51,14 +50,24 @@ const StaffRegistration = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [photo, setPhoto] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // State for loading
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
+    // Validate input fields
     if (password !== confirmPassword) {
       setError('Passwords do not match');
+      return;
+    }
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (!validateMobileNumber(mobileNumber)) {
+      setError('Please enter a valid 10-digit mobile number.');
       return;
     }
 
@@ -70,15 +79,15 @@ const StaffRegistration = () => {
     formData.append('confirmPassword', confirmPassword);
     formData.append('photo', photo);
 
+    setLoading(true); // Start loading
     try {
       const response = await fetch(`http://localhost:4000/api/staff/register`, {
         method: 'POST',
         body: formData,
       });
       
-      
-
       const data = await response.json();
+      setLoading(false); // Stop loading
       if (response.ok) {
         alert(data.message);
         navigate('/login');
@@ -86,6 +95,7 @@ const StaffRegistration = () => {
         setError(data.message);
       }
     } catch (error) {
+      setLoading(false); // Stop loading
       setError('Server error, please try again later.');
     }
   };
@@ -113,6 +123,7 @@ const StaffRegistration = () => {
           <h2 className="text-center mb-4">Staff Registration</h2>
 
           {error && <Alert variant="danger">{error}</Alert>}
+          {loading && <Alert variant="info">Submitting your registration...</Alert>} {/* Loading state */}
 
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
@@ -190,7 +201,7 @@ const StaffRegistration = () => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="w-100 mb-3">
+          <Button variant="primary" type="submit" className="w-100 mb-3" disabled={loading}>
             Register
           </Button>
           <Button variant="secondary" type="button" onClick={handleReset} className="w-100">

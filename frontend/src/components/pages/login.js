@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -44,6 +44,7 @@ const backButtonStyle = {
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('admin'); // Default role is admin
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -52,28 +53,25 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const response = await fetch(`/api/admin/login`, {
+      const endpoint = role === 'admin' ? '/api/admin/login' : '/api/staff/login';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password }),
       });
-      // const response = await axios.post('/api/admin/login', {
-      //   username,
-      //   password,
-      // });
 
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('token', data.token);
         alert(data.message);
-        navigate('/Admindashboard');
+        navigate(role === 'admin' ? '/Admindashboard' : '/StaffDashboard');
       } else {
         setError(data.message);
       }
     } catch (error) {
-      setError('Server error, please try again later.'+error.message);
+      setError('Server error, please try again later. ' + error.message);
     }
   };
 
@@ -109,6 +107,18 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Role</Form.Label>
+            <Form.Control
+              as="select"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="admin">Admin</option>
+              <option value="staff">Staff</option>
+            </Form.Control>
           </Form.Group>
 
           <Button variant="primary" type="submit" className="w-100">

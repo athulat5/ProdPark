@@ -1,7 +1,8 @@
 const multer = require('multer');
 const path = require('path');
 
-const storage = multer.diskStorage({
+// Storage configuration for staff uploads
+const staffStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/staff');
   },
@@ -10,6 +11,23 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+// Storage configuration for general uploads
+const generalStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/industry');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
 
-module.exports = upload;
+// Multer upload middleware for staff
+const uploadStaff = multer({ storage: staffStorage });
+
+// Multer upload middleware for general uploads
+const uploadGeneral = multer({ storage: generalStorage });
+
+module.exports = {
+  uploadStaff,
+  uploadGeneral
+};

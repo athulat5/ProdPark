@@ -7,8 +7,9 @@ import About from './components/pages/About';
 import LoginPage from './components/pages/Login';
 import AdminDashboard from './components/pages/Admindashboard';
 import ClientRegistration from './components/pages/Client/ClientReg';
-import CompanyRegistration from './components/pages/Industry/Reg';
-import StaffRegistration from './components/pages/Staff/Staffreg'
+import IndustryRegistration from './components/pages/Industry/IndustryRegistration';
+import StaffRegistration from './components/pages/Staff/Staffreg';
+import StaffDashboard from './components/pages/Staff/StaffDashboard';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
         <Route path="/Login" element={<LoginPage />} />    
         <Route path="/Admindashboard" element={<AdminDashboard />} />  
         <Route path="/clientReg" element={<ClientRegistration />} />
-        <Route path="/Reg" element={<CompanyRegistration />} />
+        <Route path="/IndustryRegistration" element={<IndustryRegistration />} />
         <Route path="/Staffreg" element={<StaffRegistration />} />
+        <Route path="/StaffDashboard" element={<StaffDashboard />} />
 
       </Routes>
     </Router>

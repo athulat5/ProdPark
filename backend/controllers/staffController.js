@@ -1,5 +1,6 @@
 const Staff = require('../models/StaffSchema');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // Register Staff
 exports.registerStaff = async (req, res) => {
@@ -24,5 +25,23 @@ exports.registerStaff = async (req, res) => {
     res.status(201).send('Staff registered successfully');
   } catch (error) {
     res.status(400).send('Error registering staff');
+  }
+};
+
+
+// Login Staff
+exports.loginStaff = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const staff = await Staff.findOne({ username });
+    if (!staff) return res.status(400).json({ message: 'Staff not found' });
+
+    const isMatch = await bcrypt.compare(password, staff.password);
+    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+
+    const token = jwt.sign({ id: staff._id }, 'your_jwt_secret', { expiresIn: '1h' });
+    res.json({ token, message: "login successfully" });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
   }
 };

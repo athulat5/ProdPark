@@ -29,7 +29,7 @@ function CustomNavbar() {
             {/* Dropdown for Industry Navigation */}
             <NavDropdown title="Industry" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/industry/list">Industry List</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/Reg">Add New Industry</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/IndustryRegistration">Add New Industry</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link as={Link} to="/ClientReg">New Client Registration</Nav.Link>
