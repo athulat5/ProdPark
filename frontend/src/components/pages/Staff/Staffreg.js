@@ -115,7 +115,7 @@ const StaffRegistration = () => {
 
   return (
     <div style={backgroundStyle}>
-      <button style={backButtonStyle} onClick={() => navigate('/home2')}>
+      <button style={backButtonStyle} onClick={() => navigate('/Admindashboard')}>
         Back to Home
       </button>
       <div style={formContainerStyle}>

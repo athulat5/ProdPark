@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import bgImage from '../../images/home.jpg';
+import bgImage from './../../images/home.jpg';
 
-// Inline styles
+// Inline styles for container, background, and form
 const containerStyle = {
   position: 'relative',
   minHeight: '100vh',
@@ -21,7 +20,7 @@ const backgroundStyle = {
   position: 'absolute',
   top: 0,
   left: 0,
-  zIndex: 1, // Keep background behind other elements
+  zIndex: 1,
 };
 
 const formContainerStyle = {
@@ -32,8 +31,8 @@ const formContainerStyle = {
   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
   maxWidth: '500px',
   width: '90%',
-  margin: '50px auto', // Center the form with some margin at the top
-  zIndex: 2, // Keep form above the blurred background
+  margin: '50px auto',
+  zIndex: 2,
 };
 
 const backButtonStyle = {
@@ -47,164 +46,191 @@ const backButtonStyle = {
   fontSize: '16px',
   cursor: 'pointer',
   borderRadius: '5px',
-  zIndex: 3, // Keep button above everything else
+  zIndex: 3,
 };
 
 const IndustryRegistration = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [idCard, setIdCard] = useState(null);
-  const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    address: '',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
+    idCard: null,
+    landSquareFeet: '',
+    industryDescription: '',
+  });
+
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, idCard: e.target.files[0] });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
       return;
     }
 
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('address', address);
-    formData.append('phoneNumber', phoneNumber);
-    formData.append('password', password);
-    formData.append('confirmPassword', confirmPassword);
-    formData.append('idCard', idCard);
+    const data = new FormData();
+    for (const key in formData) {
+      data.append(key, formData[key]);
+    }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/industry/register`, {
+      const response = await fetch('http://localhost:4000/api/industry1', {
         method: 'POST',
-        body: formData,
+        body: data,
       });
-
-      const data = await response.json();
       if (response.ok) {
-        alert(data.message);
-        navigate('/Home2');
+        alert('Registration request submitted successfully');
       } else {
-        setError(data.message);
+        alert('Error submitting registration request');
       }
     } catch (error) {
-      setError('Server error, please try again later.');
+      alert('Error submitting registration request');
     }
-  };
-
-  const handleReset = () => {
-    setUsername('');
-    setEmail('');
-    setAddress('');
-    setPhoneNumber('');
-    setPassword('');
-    setConfirmPassword('');
-    setIdCard(null);
-    setError(null);
   };
 
   return (
     <div style={containerStyle}>
-      <div style={backgroundStyle}></div> {/* Single background div for blur effect */}
-      <button style={backButtonStyle} onClick={() => navigate('/home2')}>
+      <div style={backgroundStyle}></div>
+      <button style={backButtonStyle} onClick={() => navigate('/Home2')}>
         Back to Home
       </button>
       <div style={formContainerStyle}>
-        <Form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <h2 className="text-center mb-4">Industry Registration</h2>
 
-          {error && <Alert variant="danger">{error}</Alert>}
-
-          <Form.Group className="mb-3">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
+          <div className="mb-3">
+            <label className="form-label">Username</label>
+            <input
               type="text"
+              className="form-control"
+              name="username"
               placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={formData.username}
+              onChange={handleChange}
               required
             />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              as="textarea" // Changed to textarea
-              placeholder="Enter address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-              rows={3} // Adjust number of visible rows
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Phone Number</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter phone number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>ID Card</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={(e) => setIdCard(e.target.files[0])}
-              required
-            />
-          </Form.Group>
-
-          <div className="d-flex justify-content-between">
-            <Button variant="primary" type="submit">
-              Register
-            </Button>
-            <Button variant="secondary" type="button" onClick={handleReset}>
-              Reset
-            </Button>
           </div>
-        </Form>
+
+          <div className="mb-3">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              placeholder="Enter email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Address</label>
+            <textarea
+              className="form-control"
+              name="address"
+              placeholder="Enter address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+              rows={3}
+            ></textarea>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Phone Number</label>
+            <input
+              type="text"
+              className="form-control"
+              name="phoneNumber"
+              placeholder="Enter phone number"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              placeholder="Enter password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              name="confirmPassword"
+              placeholder="Confirm password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">ID Card</label>
+            <input
+              type="file"
+              className="form-control"
+              name="idCard"
+              onChange={handleFileChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Land Required (Square Feet)</label>
+            <input
+              type="number"
+              className="form-control"
+              name="landSquareFeet"
+              placeholder="Enter land in square feet"
+              value={formData.landSquareFeet}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Industry Description</label>
+            <textarea
+              className="form-control"
+              name="industryDescription"
+              placeholder="Describe the industry you plan to start"
+              value={formData.industryDescription}
+              onChange={handleChange}
+              required
+              rows={3}
+            ></textarea>
+          </div>
+
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary">
+              Register
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

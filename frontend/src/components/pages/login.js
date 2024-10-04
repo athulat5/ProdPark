@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -53,7 +52,29 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const endpoint = role === 'admin' ? '/api/admin/login' : '/api/staff/login';
+      let endpoint;
+      let dashboard;
+      switch (role) {
+        case 'admin':
+          endpoint = '/api/admin/login';
+          dashboard = '/Admindashboard';
+          break;
+        case 'staff':
+          endpoint = '/api/staff/login';
+          dashboard = '/StaffDashboard';
+          break;
+        case 'industry':
+          endpoint = '/api/industry1/login';
+          dashboard = '/IndustryDashboard';
+          break;
+        case 'client':
+          endpoint = '/api/client/login';
+          dashboard = '/ClientDashboard';
+          break;
+        default:
+          throw new Error('Invalid role selected');
+      }
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -66,7 +87,7 @@ const LoginPage = () => {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         alert(data.message);
-        navigate(role === 'admin' ? '/Admindashboard' : '/StaffDashboard');
+        navigate(dashboard);
       } else {
         setError(data.message);
       }
@@ -118,6 +139,8 @@ const LoginPage = () => {
             >
               <option value="admin">Admin</option>
               <option value="staff">Staff</option>
+              <option value="industry">Industry</option>
+              <option value="client">Client</option>
             </Form.Control>
           </Form.Group>
 

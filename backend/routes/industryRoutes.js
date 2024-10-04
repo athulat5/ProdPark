@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { uploadGeneral } = require('../config/multerConfig');
-const { registerIndustry } = require('../controllers/industryController');
+const industryController = require('../controllers/industryController');
 
-// Register Route
-router.post('/register', uploadGeneral.single('idCard'), registerIndustry);
+module.exports = (upload) => {
+  router.get('/', industryController.getAllIndustries);
+  router.post('/', upload.single('idCard'), industryController.registerIndustry);
+  router.put('/:id', upload.single('idCard'), industryController.updateIndustry);
+  router.delete('/:id', industryController.deleteIndustry);
+ 
 
-module.exports = router;
+  return router;
+};

@@ -138,9 +138,29 @@ const StaffDashboard = () => {
             </Card>
           </Col>
         </Row>
+        
+        <Row>
+          <Col lg={6} md={6} sm={12} className="mb-4">
+            <Card
+              className="text-center"
+              style={styles.card}
+              onMouseOver={(e) => (e.currentTarget.style.boxShadow = styles.cardHover.boxShadow)}
+              onMouseOut={(e) => (e.currentTarget.style.boxShadow = styles.card.boxShadow)}
+            >
+              <Card.Body style={styles.cardBody}>
+                <Card.Title>Clent Apporve</Card.Title>
+                <Card.Text>View and Approve Client.</Card.Text>
+                <Button variant="primary" onClick={() => navigate('/Clientapprove')}>
+                  Client Approve
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          </Row>
       </Container>
     </div>
   );
 };
 
 export default StaffDashboard;
+
