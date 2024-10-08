@@ -144,7 +144,7 @@ const LoginPage = () => {
             </Form.Control>
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="w-100">
+          <Button variant="primary" type="submit">
             Login
           </Button>
         </Form>

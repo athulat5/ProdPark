@@ -60,6 +60,8 @@ exports.approveIndustry = async (req, res) => {
 
 // Get All Industry Requests
 exports.getAllIndustryRequests = async (req, res) => {
+  console.log(response.data);
+
   try {
     const industryRequests = await Industry1.find();
     res.json(industryRequests);
@@ -67,6 +69,8 @@ exports.getAllIndustryRequests = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 // exports.loginIndustry = async (req, res) => {
 //     const { username, password } = req.body;
@@ -99,5 +103,30 @@ exports.getAllIndustryRequests = async (req, res) => {
       res.json({ token, message: "login successfully" });
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
+    }
+  };
+
+  exports.updateIndustry = async (req, res) => {
+    try {
+      const { password, ...updateData } = req.body;
+      if (password) {
+        updateData.password = await bcrypt.hash(password, 10);
+      }
+      if (req.file) {
+        updateData.idCard = req.file.path;
+      }
+      const updatedIndustry = await Industry1.findByIdAndUpdate(req.params.id, updateData, { new: true });
+      res.json(updatedIndustry);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+  
+  exports.deleteIndustry = async (req, res) => {
+    try {
+      await Industry1.findByIdAndDelete(req.params.id);
+      res.json({ message: 'Industry deleted' });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
   };

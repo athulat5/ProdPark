@@ -8,6 +8,11 @@ module.exports = (upload) => {
   router.post('/', upload.single('idCard'), industry1Controller.registerIndustry);
   router.post('/approve/:id', industry1Controller.approveIndustry);
   router.post('/login', industry1Controller.loginIndustry);
+  
+
+
+  router.put('/:id', upload.single('idCard'), industry1Controller.updateIndustry);
+  router.delete('/:id', industry1Controller.deleteIndustry);
 
   return router;
 };

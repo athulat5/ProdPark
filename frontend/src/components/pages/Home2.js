@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown'; // Import NavDropdown
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import bg from './../images/home.jpg';
 
 const homeStyle = {
@@ -15,34 +15,45 @@ const homeStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  padding: '0 20px', // Add padding for smaller screens
 };
 
-function CustomNavbar() {
+
+
+const navbarStyle = {
+  backgroundColor: '#f8f9fa',
+};
+
+const CustomNavbar = () => {
   return (
     <>
-      <Navbar bg="light" data-bs-theme="light">
+      <Navbar style={navbarStyle} expand="lg" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">ProdPark</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/Login">Login</Nav.Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/Login">Login</Nav.Link>
 
-            {/* Dropdown for Industry Navigation */}
-            <NavDropdown title="Industry" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/industry/list">Industry List</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/IndustryRegistration">Add New Industry</NavDropdown.Item>
-            </NavDropdown>
+              {/* Dropdown for Industry Navigation */}
+              <NavDropdown title="Industry" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/industry/list">Industry List</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/IndustryRegistration">Add New Industry</NavDropdown.Item>
+              </NavDropdown>
 
-            <Nav.Link as={Link} to="/ClientReg">New Client Registration</Nav.Link>
-            <Nav.Link as={Link} to="/Indusrty">Existing Industry</Nav.Link>
-            <Nav.Link as={Link} to="/About">About</Nav.Link>
-          </Nav>
+              <Nav.Link as={Link} to="/ClientReg">New Client Registration</Nav.Link>
+              <Nav.Link as={Link} to="/Indusrty">Existing Industry</Nav.Link>
+              <Nav.Link as={Link} to="/About">About</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
+
       <div style={homeStyle}>
-        {/* You can add more content here if needed */}
+        
       </div>
     </>
   );
-}
+};
 
 export default CustomNavbar;

@@ -76,6 +76,20 @@ const AdminDashboard = () => {
           <Col md={6}>
             <Card style={cardStyle} className="p-3">
               <Card.Body>
+                <Card.Title>Industry Approve</Card.Title>
+                <Card.Text>
+                View and Approve Client
+                </Card.Text>
+                <Link to="/IndustryApproval">
+                  <Button variant="primary">Industry Approve</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+          
+          <Col md={6}>
+            <Card style={cardStyle} className="p-3">
+              <Card.Body>
                 <Card.Title>View Staff</Card.Title>
                 <Card.Text>
                   View and manage all registered staff members.
@@ -93,7 +107,7 @@ const AdminDashboard = () => {
                 <Card.Text>
                   Review the list of registered companies.
                 </Card.Text>
-                <Link to="/admin/view-companies">
+                <Link to="/IndustryList">
                   <Button variant="primary">Go to View Companies</Button>
                 </Link>
               </Card.Body>
@@ -112,6 +126,8 @@ const AdminDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
+
+         
         </Row>
       </div>
     </div>

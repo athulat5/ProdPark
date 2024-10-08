@@ -96,7 +96,7 @@ const StaffDashboard = () => {
               <Card.Body style={styles.cardBody}>
                 <Card.Title>View Companies</Card.Title>
                 <Card.Text>View and manage all company details.</Card.Text>
-                <Button variant="primary" onClick={() => navigate('/Reg')}>
+                <Button variant="primary" onClick={() => navigate('/IndustryList')}>
                   View Companies
                 </Button>
               </Card.Body>
@@ -150,7 +150,7 @@ const StaffDashboard = () => {
               <Card.Body style={styles.cardBody}>
                 <Card.Title>Clent Apporve</Card.Title>
                 <Card.Text>View and Approve Client.</Card.Text>
-                <Button variant="primary" onClick={() => navigate('/Clientapprove')}>
+                <Button variant="primary" onClick={() => navigate('/ClientApprove')}>
                   Client Approve
                 </Button>
               </Card.Body>

@@ -25,6 +25,7 @@ exports.registerStaff = async (req, res) => {
     res.status(201).send('Staff registered successfully');
   } catch (error) {
     res.status(400).send('Error registering staff');
+    console.log(error);
   }
 };
 

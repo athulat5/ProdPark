@@ -6,13 +6,17 @@ import './style.css';
 function Home() {
   const homeStyle = {
     backgroundImage: `url(${bg3})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh',
-    width: '100vw',
+    backgroundSize: 'cover',         // Maintain cover for full area
+    backgroundPosition: 'center',     // Center the image
+    backgroundRepeat: 'no-repeat',    // Prevent repeating
+    height: '100vh',                  // Full viewport height
+    width: '100vw',                   // Full viewport width
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
+    flexDirection: 'column',          // Stack items vertically
+    padding: '20px',                  // Add padding
+    textAlign: 'center',              // Center text
   };
 
   return (

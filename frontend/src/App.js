@@ -14,6 +14,8 @@ import StaffManagement from './components/pages/Staff/StaffManagement';
 import IndustryApproval from './components/pages/Industry/IndustryApproval';
 import IndustryDashboard from './components/pages/Industry/IndustryDashboard';
 import ClientDashboard from './components/pages/Client/ClientDashboard';
+import IndustryList from './components/pages/Industry/IndustryList';
+import ClientApprove from './components/pages/Client/ClientApprove';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path="/IndustryApproval" element={<IndustryApproval />} />
         <Route path="/IndustryDashboard" element={<IndustryDashboard />} />
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
+        <Route path="/IndustryList" element={<IndustryList />} />
+        <Route path="/ClientApprove" element={<ClientApprove />} />
 
       </Routes>
     </Router>

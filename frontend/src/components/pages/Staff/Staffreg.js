@@ -86,17 +86,18 @@ const StaffRegistration = () => {
         body: formData,
       });
       
-      const data = await response.json();
-      setLoading(false); // Stop loading
+      // const data = await response.json();
+      // setLoading(false); // Stop loading
       if (response.ok) {
-        alert(data.message);
-        navigate('/login');
+        alert('Registration request submitted successfully');
+        navigate('/Admindashboard');
       } else {
-        setError(data.message);
+        setError('Error submitting registration request username exits');
       }
     } catch (error) {
-      setLoading(false); // Stop loading
-      setError('Server error, please try again later.');
+      // setLoading(false); // Stop loading
+      setError('Server error, please try again later.'+error);
+
     }
   };
 
@@ -115,7 +116,7 @@ const StaffRegistration = () => {
 
   return (
     <div style={backgroundStyle}>
-      <button style={backButtonStyle} onClick={() => navigate('/Admindashboard')}>
+      <button style={backButtonStyle} onClick={() => navigate(-1)}>
         Back to Home
       </button>
       <div style={formContainerStyle}>

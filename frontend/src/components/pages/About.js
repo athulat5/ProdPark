@@ -79,7 +79,7 @@ const About = () => {
 
         <h2 style={{ fontSize: '36px', marginBottom: '20px' }}>About the Developer</h2>
         <p style={{ fontSize: '18px', lineHeight: '1.6', maxWidth: '800px' }}>
-          This application was developed by [Your Name], an MCA student and passionate software developer, focused on delivering innovative solutions for business challenges. With a solid foundation in the MERN stack and hands-on experience in software development, [Your Name] has built ProdPark to meet the needs of modern industries.
+          This application was developed by Athul Anil, an MCA student and passionate software developer, focused on delivering innovative solutions for business challenges. With a solid foundation in the MERN stack and hands-on experience in software development, Athul Anil has built ProdPark to meet the needs of modern industries.
         </p>
       </div>
     </div>
