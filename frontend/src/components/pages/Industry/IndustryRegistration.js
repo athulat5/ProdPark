@@ -75,6 +75,7 @@ const IndustryRegistration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Password matching check
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match');
       return;
@@ -91,7 +92,8 @@ const IndustryRegistration = () => {
         body: data,
       });
       if (response.ok) {
-        alert('Registration request submitted successfully');
+        alert('Registration request submitted successfully waite for Approval');
+        // Optionally navigate to another page or reset the form here
       } else {
         alert('Error submitting registration request');
       }

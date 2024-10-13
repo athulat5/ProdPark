@@ -29,11 +29,11 @@ const IndustryDashboard = () => {
   };
 
   const handleAddProduct = () => {
-    navigate('/add-product');
+    navigate('/AddProduct');
   };
 
   const handleAddComplaint = () => {
-    navigate('/add-complaint');
+    navigate('/ComplaintForm');
   };
 
   const handleViewOrders = () => {

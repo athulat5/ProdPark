@@ -50,25 +50,25 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-
     try {
       let endpoint;
       let dashboard;
+
       switch (role) {
         case 'admin':
-          endpoint = '/api/admin/login';
+          endpoint = 'http://localhost:4000/api/admin/login';
           dashboard = '/Admindashboard';
           break;
         case 'staff':
-          endpoint = '/api/staff/login';
+          endpoint = 'http://localhost:4000/api/staff/login';
           dashboard = '/StaffDashboard';
           break;
         case 'industry':
-          endpoint = '/api/industry1/login';
+          endpoint = 'http://localhost:4000/api/industry1/login';
           dashboard = '/IndustryDashboard';
           break;
         case 'client':
-          endpoint = '/api/client/login';
+          endpoint = 'http://localhost:4000/api/client/login';
           dashboard = '/ClientDashboard';
           break;
         default:
@@ -85,6 +85,7 @@ const LoginPage = () => {
 
       const data = await response.json();
       if (response.ok) {
+        console.log('Token received:', data.token); // Debug log
         localStorage.setItem('token', data.token);
         alert(data.message);
         navigate(dashboard);
@@ -92,6 +93,7 @@ const LoginPage = () => {
         setError(data.message);
       }
     } catch (error) {
+      console.error('Login error:', error.message); // Debug log
       setError('Server error, please try again later. ' + error.message);
     }
   };
@@ -101,13 +103,10 @@ const LoginPage = () => {
       <button style={backButtonStyle} onClick={() => navigate('/home2')}>
         Back to Home
       </button>
-
       <div style={formContainerStyle}>
         <Form onSubmit={handleSubmit}>
           <h2 className="text-center mb-4">Login to ProdPark</h2>
-
           {error && <Alert variant="danger">{error}</Alert>}
-
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -118,7 +117,6 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -129,7 +127,6 @@ const LoginPage = () => {
               required
             />
           </Form.Group>
-
           <Form.Group className="mb-3">
             <Form.Label>Role</Form.Label>
             <Form.Control
@@ -143,7 +140,6 @@ const LoginPage = () => {
               <option value="client">Client</option>
             </Form.Control>
           </Form.Group>
-
           <Button variant="primary" type="submit">
             Login
           </Button>

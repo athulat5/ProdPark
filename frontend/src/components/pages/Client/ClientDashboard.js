@@ -20,7 +20,7 @@ const cardStyle = {
   backgroundColor: 'rgba(255, 255, 255, 0.9)',
 };
 
-const IndustryDashboard = () => {
+const ClientDashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -28,23 +28,19 @@ const IndustryDashboard = () => {
     navigate('/login');
   };
 
-  const handleAddProduct = () => {
-    navigate('/add-product');
+  const handleViewCompanies = () => {
+    navigate('/view-companies');
   };
 
-  const handleAddComplaint = () => {
-    navigate('/add-complaint');
-  };
-
-  const handleViewOrders = () => {
-    navigate('/order-details');
+  const handleBuyProducts = () => {
+    navigate('/BuyProduct');
   };
 
   return (
     <div style={backgroundStyle}>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="\IndustryDashboard">Industry Dashboard</Navbar.Brand>
+          <Navbar.Brand href="\ClientDashboard">Client Dashboard</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -61,12 +57,12 @@ const IndustryDashboard = () => {
           <Col xs={12} md={6} lg={4}>
             <Card style={cardStyle}>
               <Card.Body>
-                <Card.Title>Add Product Details</Card.Title>
+                <Card.Title>View Companies</Card.Title>
                 <Card.Text>
-                  Add new products to showcase to potential customers.
+                  Explore available companies and their offerings.
                 </Card.Text>
-                <Button variant="primary" onClick={handleAddProduct}>
-                  Add Product
+                <Button variant="primary" onClick={handleViewCompanies}>
+                  View Companies
                 </Button>
               </Card.Body>
             </Card>
@@ -74,38 +70,12 @@ const IndustryDashboard = () => {
           <Col xs={12} md={6} lg={4}>
             <Card style={cardStyle}>
               <Card.Body>
-                <Card.Title>Add Complaint</Card.Title>
+                <Card.Title>Buy Products</Card.Title>
                 <Card.Text>
-                  Lodge complaints for any issues faced in the process.
+                  Purchase products directly from the companies.
                 </Card.Text>
-                <Button variant="primary" onClick={handleAddComplaint}>
-                  Add Complaint
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} md={6} lg={4}>
-            <Card style={cardStyle}>
-              <Card.Body>
-                <Card.Title>Order Details</Card.Title>
-                <Card.Text>
-                  View all order details and manage customer orders.
-                </Card.Text>
-                <Button variant="primary" onClick={handleViewOrders}>
-                  View Orders
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} md={6} lg={4}>
-            <Card style={cardStyle}>
-              <Card.Body>
-                <Card.Title>Update Industry Details</Card.Title>
-                <Card.Text>
-                  View and update your industry details.
-                </Card.Text>
-                <Button variant="primary" onClick={() => navigate('/UpdateDetails')}>
-                  Update Details
+                <Button variant="primary" onClick={handleBuyProducts}>
+                  Buy Products
                 </Button>
               </Card.Body>
             </Card>
@@ -116,4 +86,4 @@ const IndustryDashboard = () => {
   );
 };
 
-export default IndustryDashboard;
+export default ClientDashboard;

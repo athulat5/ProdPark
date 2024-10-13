@@ -16,6 +16,14 @@ import IndustryDashboard from './components/pages/Industry/IndustryDashboard';
 import ClientDashboard from './components/pages/Client/ClientDashboard';
 import IndustryList from './components/pages/Industry/IndustryList';
 import ClientApprove from './components/pages/Client/ClientApprove';
+import ComplaintForm from './components/pages/Industry/ComplaintForm';
+import AdminFeedback from './components/pages/AdminFeedback';
+import ViewAllCompanies from './components/pages/Industry/ViewAllCompanies';
+import BuyProduct from './components/pages/Client/BuyProduct';
+import AddProduct from './components/pages/Client/AddProduct';
+import PaymentPage from './components/pages/Client/PaymentPage';
+import PaymentSuccess from './components/pages/Client/Thank';
+
 
 function App() {
   return (
@@ -36,6 +44,14 @@ function App() {
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
         <Route path="/IndustryList" element={<IndustryList />} />
         <Route path="/ClientApprove" element={<ClientApprove />} />
+        <Route path="/ComplaintForm" element={<ComplaintForm />} />
+        <Route path="/AdminFeedback" element={<AdminFeedback />} />
+        <Route path="/ViewAllCompanies" element={<ViewAllCompanies />} />
+        <Route path="/BuyProduct" element={<BuyProduct />} />
+        <Route path="/AddProduct" element={<AddProduct />} />
+        <Route path="/payment/:productId" element={<PaymentPage />} />
+        <Route path="/buy" element={<BuyProduct />} />
+        <Route path="/thank" element={<PaymentSuccess />} />
 
       </Routes>
     </Router>

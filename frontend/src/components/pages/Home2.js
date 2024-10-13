@@ -42,7 +42,7 @@ const CustomNavbar = () => {
               </NavDropdown>
 
               <Nav.Link as={Link} to="/ClientReg">New Client Registration</Nav.Link>
-              <Nav.Link as={Link} to="/Indusrty">Existing Industry</Nav.Link>
+              <Nav.Link as={Link} to="/ViewAllCompanies">Existing Industry</Nav.Link>
               <Nav.Link as={Link} to="/About">About</Nav.Link>
             </Nav>
           </Navbar.Collapse>

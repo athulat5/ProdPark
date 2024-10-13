@@ -116,11 +116,11 @@ const AdminDashboard = () => {
           <Col md={6}>
             <Card style={cardStyle} className="p-3">
               <Card.Body>
-                <Card.Title>View Complaints</Card.Title>
+                <Card.Title> Complaints</Card.Title>
                 <Card.Text>
                   Check all complaints lodged by customers.
                 </Card.Text>
-                <Link to="/admin/view-complaints">
+                <Link to="/AdminFeedback">
                   <Button variant="primary">Go to View Complaints</Button>
                 </Link>
               </Card.Body>

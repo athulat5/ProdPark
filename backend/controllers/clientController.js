@@ -1,7 +1,7 @@
 const Client = require('./../models/ClientModel');
 
 exports.registerClient = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     try {
         const { username, password, confirmPassword, address } = req.body;
         if (password !== confirmPassword) {
@@ -51,7 +51,7 @@ exports.rejectClient = async (req, res) => {
 
 
 exports.loginClient = async (req, res) => {
-    console.log(req.data);
+    // console.log(req.data);
     try {
         const { username, password } = req.body;
         const client = await Client.findOne({ username, password });
@@ -70,3 +70,17 @@ exports.loginClient = async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 };
+
+exports.deleteClient = async (req, res) => {
+    try {
+      const client = await Client.findByIdAndDelete(req.params.id);
+  
+      if (!client) {
+        return res.status(404).json({ message: 'Client not found' });
+      }
+  
+      res.json({ message: 'Client deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error deleting client', error: error.message });
+    }
+  }  ;
