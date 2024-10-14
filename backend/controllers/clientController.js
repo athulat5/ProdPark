@@ -1,7 +1,7 @@
 const Client = require('./../models/ClientModel');
 
 exports.registerClient = async (req, res) => {
-    // console.log(req.body);
+     console.log(req.body);
     try {
         const { username, password, confirmPassword, address } = req.body;
         if (password !== confirmPassword) {

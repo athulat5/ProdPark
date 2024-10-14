@@ -23,6 +23,7 @@ import BuyProduct from './components/pages/Client/BuyProduct';
 import AddProduct from './components/pages/Client/AddProduct';
 import PaymentPage from './components/pages/Client/PaymentPage';
 import PaymentSuccess from './components/pages/Client/Thank';
+import CheckApprovalStatus from './components/pages/Industry/CheckApprovalStatus';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         <Route path="/payment/:productId" element={<PaymentPage />} />
         <Route path="/buy" element={<BuyProduct />} />
         <Route path="/thank" element={<PaymentSuccess />} />
+        <Route path="/CheckApprovalStatus" element={<CheckApprovalStatus />} />
 
       </Routes>
     </Router>

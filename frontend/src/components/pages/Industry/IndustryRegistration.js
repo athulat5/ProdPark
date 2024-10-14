@@ -93,6 +93,7 @@ const IndustryRegistration = () => {
       });
       if (response.ok) {
         alert('Registration request submitted successfully waite for Approval');
+        navigate('/IndustryDashboard');
         // Optionally navigate to another page or reset the form here
       } else {
         alert('Error submitting registration request');

@@ -13,6 +13,7 @@ module.exports = (upload) => {
 
   router.put('/:id', upload.single('idCard'), industry1Controller.updateIndustry);
   router.delete('/:id', industry1Controller.deleteIndustry);
+  router.post('/checkapproval', industry1Controller.checkApprovalStatus); 
 
   return router;
 };

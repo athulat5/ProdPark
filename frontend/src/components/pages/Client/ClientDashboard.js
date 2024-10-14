@@ -29,7 +29,7 @@ const ClientDashboard = () => {
   };
 
   const handleViewCompanies = () => {
-    navigate('/view-companies');
+    navigate('/ViewAllCompanies');
   };
 
   const handleBuyProducts = () => {

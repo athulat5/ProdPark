@@ -32,6 +32,7 @@ const App = () => {
         try {
             const response = await axios.post('/api/client', data);
             alert(response.data.message);
+            navigate('/Home2');
         } catch (error) {
             alert('Error registering client');
         }
@@ -98,7 +99,7 @@ const App = () => {
         <div style={containerStyle}>
             <button
                 style={backButtonStyle}
-                onClick={() => navigate('/AdminDashboard')}
+                onClick={() => navigate('/Home2')}
             >
                 Back
             </button>

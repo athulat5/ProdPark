@@ -139,3 +139,22 @@ exports.loginIndustry = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+
+
+  // Check Approval Status
+exports.checkApprovalStatus = async (req, res) => {
+  // console.log(req.body);
+  try {
+    const { username } = req.body;
+    const industry = await Industry.findOne({ username });
+
+    if (industry) {
+      res.status(200).json({ message: 'Your registration is approved.' });
+    } else {
+      res.status(404).json({ message: 'Username not found. Please register first.' });
+    }
+  } catch (error) {
+    console.error('Error checking approval status:', error);
+    res.status(500).json({ message: 'An error occurred. Please try again later.' });
+  }
+};

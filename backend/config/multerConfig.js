@@ -23,7 +23,7 @@ const generalStorage = multer.diskStorage({
 
 const generalStorage1 = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/clinet');
+    cb(null, 'uploads/client');
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));

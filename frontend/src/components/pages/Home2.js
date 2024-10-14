@@ -37,7 +37,7 @@ const CustomNavbar = () => {
 
               {/* Dropdown for Industry Navigation */}
               <NavDropdown title="Industry" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/industry/list">Industry List</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/CheckApprovalStatus">Check Approval Status</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/IndustryRegistration">Add New Industry</NavDropdown.Item>
               </NavDropdown>
 

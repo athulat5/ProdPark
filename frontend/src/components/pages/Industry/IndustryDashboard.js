@@ -101,19 +101,7 @@ const IndustryDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={12} md={6} lg={4}>
-            <Card style={cardStyle}>
-              <Card.Body>
-                <Card.Title>Update Client Details</Card.Title>
-                <Card.Text>
-                  View and update your client details.
-                </Card.Text>
-                <Button variant="primary" onClick={() => navigate('/update-client-details')}>
-                  Update Client Details
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+          
           <Col xs={12} md={6} lg={4}>
             <Card style={cardStyle}>
               <Card.Body>
