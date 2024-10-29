@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import bgImage from './../images/home.jpg';
+import { AuthContext } from './../../AuthProvider';
 
 const backgroundStyle = {
   backgroundImage: `url(${bgImage})`,
@@ -41,6 +42,7 @@ const backButtonStyle = {
 };
 
 const LoginPage = () => {
+  const { login } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('admin'); // Default role is admin
@@ -87,6 +89,8 @@ const LoginPage = () => {
       if (response.ok) {
         console.log('Token received:', data.token); // Debug log
         localStorage.setItem('token', data.token);
+        login(data.token);
+
         alert(data.message);
         navigate(dashboard);
       } else {

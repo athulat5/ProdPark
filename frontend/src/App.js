@@ -24,17 +24,25 @@ import AddProduct from './components/pages/Client/AddProduct';
 import PaymentPage from './components/pages/Client/PaymentPage';
 import PaymentSuccess from './components/pages/Client/Thank';
 import CheckApprovalStatus from './components/pages/Industry/CheckApprovalStatus';
+import AuthProvider from './AuthProvider';
+import ProtectedRoute from './ProtectedRoute';
 
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home2" element={<Home2 />} />
         <Route path="/about" element={<About />} />
-        <Route path="/Login" element={<LoginPage />} />    
-        <Route path="/Admindashboard" element={<AdminDashboard />} />  
+        <Route path="/Login" element={<LoginPage />} />
+
+        {/* <Route path="/Admindashboard" element={<AdminDashboard />} />   */}
+        <Route path="/Admindashboard" element={<ProtectedRoute />}>
+          <Route path="" element={<AdminDashboard />} />
+        </Route>
+
         <Route path="/clientReg" element={<ClientRegistration />} />
         <Route path="/IndustryRegistration" element={<IndustryRegistration />} />
         <Route path="/Staffreg" element={<StaffRegistration />} />
@@ -57,6 +65,7 @@ function App() {
 
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 

@@ -13,6 +13,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const productRoutes = require('./routes/productRoutes')
 const pay =require('./routes/paymentr');
 const path = require('path');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/client', clientRoutes);
 app.use('/api/complaints', authMiddleware, complaintRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/payments', pay)
+app.use('/api/auth', authRoutes);
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI).then(() => {
   // Listen for requests
