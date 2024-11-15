@@ -26,6 +26,13 @@ import PaymentSuccess from './components/pages/Client/Thank';
 import CheckApprovalStatus from './components/pages/Industry/CheckApprovalStatus';
 import AuthProvider from './AuthProvider';
 import ProtectedRoute from './ProtectedRoute';
+import OrderList from './components/pages/Industry/OrderList';
+import AddRawMaterial from './components/pages/Staff/AddRawMaterial';
+import  EditOrder from './components/pages/Staff/EditOrder';
+import  ListOrders from './components/pages/Staff/ListOrders';
+import BuyRawMaterial from './components/pages/Industry/BuyRawMaterial';
+import RPaymentPage from './components/pages/Industry/RPaymentPage';
+
 
 
 function App() {
@@ -45,25 +52,80 @@ function App() {
 
         <Route path="/clientReg" element={<ClientRegistration />} />
         <Route path="/IndustryRegistration" element={<IndustryRegistration />} />
-        <Route path="/Staffreg" element={<StaffRegistration />} />
-        <Route path="/StaffDashboard" element={<StaffDashboard />} />
-        <Route path="/StaffManagement" element={<StaffManagement />} />
-        <Route path="/IndustryApproval" element={<IndustryApproval />} />
-        <Route path="/IndustryDashboard" element={<IndustryDashboard />} />
-        <Route path="/ClientDashboard" element={<ClientDashboard />} />
+        
+        <Route path="/Staffreg" element={<ProtectedRoute />}>
+          <Route path="" element={<StaffRegistration />} />
+        </Route>
+        <Route path="/StaffDashboard" element={<ProtectedRoute />}>
+          <Route path="" element={<StaffDashboard />} />
+        </Route>
+        <Route path="/StaffManagement" element={<ProtectedRoute />}>
+          <Route path="" element={<StaffManagement />} />
+        </Route>
+        <Route path="/IndustryApproval" element={<ProtectedRoute />}>
+          <Route path="" element={<IndustryApproval />} />
+        </Route>
+        <Route path="/IndustryDashboard" element={<ProtectedRoute />}>
+          <Route path="" element={<IndustryDashboard />} />
+        </Route>
+        <Route path="/ClientDashboard" element={<ProtectedRoute />}>
+          <Route path="" element={<ClientDashboard />} />
+        </Route>
         <Route path="/IndustryList" element={<IndustryList />} />
-        <Route path="/ClientApprove" element={<ClientApprove />} />
-        <Route path="/ComplaintForm" element={<ComplaintForm />} />
-        <Route path="/AdminFeedback" element={<AdminFeedback />} />
+      
+        <Route path="/ClientApprove" element={<ProtectedRoute />}>
+          <Route path="" element={<ClientApprove />} />
+        </Route>
+        <Route path="/ComplaintForm" element={<ProtectedRoute />}>
+          <Route path="" element={<ComplaintForm />} />
+        </Route>
+        <Route path="/AdminFeedback" element={<ProtectedRoute />}>
+          <Route path="" element={<AdminFeedback />} />
+        </Route>
         <Route path="/ViewAllCompanies" element={<ViewAllCompanies />} />
-        <Route path="/BuyProduct" element={<BuyProduct />} />
-        <Route path="/AddProduct" element={<AddProduct />} />
-        <Route path="/payment/:productId" element={<PaymentPage />} />
-        <Route path="/buy" element={<BuyProduct />} />
-        <Route path="/thank" element={<PaymentSuccess />} />
+       
+        <Route path="/BuyProduct" element={<ProtectedRoute />}>
+          <Route path="" element={<BuyProduct />} />
+        </Route>
+        <Route path="/AddProduct" element={<ProtectedRoute />}>
+          <Route path="" element={<AddProduct />} />
+        </Route>
+        <Route path="/payment/:productId" element={<ProtectedRoute />}>
+          <Route path="" element={<PaymentPage />} />
+        </Route>
+        <Route path="/buy" element={<ProtectedRoute />}>
+          <Route path="" element={<BuyProduct />} />
+        </Route>
+        <Route path="/thank" element={<ProtectedRoute />}>
+          <Route path="" element={<PaymentSuccess />} />
+        </Route>
         <Route path="/CheckApprovalStatus" element={<CheckApprovalStatus />} />
+        
+        {/* <Route path="/order-details" element={<ProtectedRoute />}>
+          <Route path=""element={<OrderDetails />} />
+        </Route> */}
+      
+        <Route path="/orders" element={<ProtectedRoute />}>
+          <Route path=""element={<OrderList />} />
+        </Route>
+        <Route path="/rawMaterials" element={<ProtectedRoute />}>
+          <Route path=""element={<AddRawMaterial />} />
+        </Route>
 
-      </Routes>
+        <Route path="/rawMaterialsorder" element={<ProtectedRoute />}>
+    <Route path="" element={<EditOrder />} />
+  </Route>
+        <Route path="/listOrders" element={<ProtectedRoute />}>
+          <Route path=""element={<ListOrders />} />
+        </Route>
+        <Route path="/buyRawMaterial" element={<ProtectedRoute />}>
+          <Route path=""element={<BuyRawMaterial />} />
+        </Route>
+        <Route path="/RPaymentPage/:productId" element={<ProtectedRoute />}>
+          <Route path=""element={<RPaymentPage />} />
+        </Route>
+        
+        </Routes>
     </Router>
     </AuthProvider>
   );

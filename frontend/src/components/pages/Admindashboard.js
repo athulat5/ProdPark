@@ -113,7 +113,7 @@ const AdminDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={6}>
+          {/* <Col md={6}>
             <Card style={cardStyle} className="p-3">
               <Card.Body>
                 <Card.Title> Complaints</Card.Title>
@@ -125,7 +125,7 @@ const AdminDashboard = () => {
                 </Link>
               </Card.Body>
             </Card>
-          </Col>
+          </Col> */}
 
          
         </Row>

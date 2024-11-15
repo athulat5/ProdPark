@@ -32,26 +32,21 @@ const IndustryDashboard = () => {
     navigate('/AddProduct');
   };
 
-  const handleAddComplaint = () => {
-    navigate('/ComplaintForm');
-  };
-
-  const handleViewOrders = () => {
-    navigate('/order-details');
-  };
-
-  const handleViewCompanies = () => {
-    navigate('/view-companies');
+  const handleChangePassword = () => {
+    navigate('/change-password'); // Navigate to the Change Password page
   };
 
   return (
     <div style={backgroundStyle}>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="\IndustryDashboard">Industry Dashboard</Navbar.Brand>
+          <Navbar.Brand href="/IndustryDashboard">Industry Dashboard</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              <Nav.Link onClick={handleChangePassword} style={{ cursor: 'pointer' }}>
+                Change Password
+              </Nav.Link>
               <Button variant="outline-light" onClick={handleLogout}>
                 Logout
               </Button>
@@ -71,46 +66,6 @@ const IndustryDashboard = () => {
                 </Card.Text>
                 <Button variant="primary" onClick={handleAddProduct}>
                   Add Product
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} md={6} lg={4}>
-            <Card style={cardStyle}>
-              <Card.Body>
-                <Card.Title>Add Complaint</Card.Title>
-                <Card.Text>
-                  Lodge complaints for any issues faced in the process.
-                </Card.Text>
-                <Button variant="primary" onClick={handleAddComplaint}>
-                  Add Complaint
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} md={6} lg={4}>
-            <Card style={cardStyle}>
-              <Card.Body>
-                <Card.Title>Order Details</Card.Title>
-                <Card.Text>
-                  View all order details and manage customer orders.
-                </Card.Text>
-                <Button variant="primary" onClick={handleViewOrders}>
-                  View Orders
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          
-          <Col xs={12} md={6} lg={4}>
-            <Card style={cardStyle}>
-              <Card.Body>
-                <Card.Title>View Companies</Card.Title>
-                <Card.Text>
-                  Check the list of registered companies.
-                </Card.Text>
-                <Button variant="primary" onClick={handleViewCompanies}>
-                  View Companies
                 </Button>
               </Card.Body>
             </Card>

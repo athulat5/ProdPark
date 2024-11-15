@@ -2,28 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const PaymentPage = () => {
+const RPaymentPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [paymentDetails, setPaymentDetails] = useState({
     cardNumber: '',
     expiryDate: '',
     cvv: '',
-    // userName: '',
-    // address: '',
     name: '',
-    houseName: '',
-    city: '',
-    locality: '',
-    pincode: '',
     phone: '',
   });
-  const [successMessage] = useState('');
   const navigate = useNavigate();
 
   const fetchProduct = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/products/${productId}`);
+      const response = await axios.get(`http://localhost:4000/api/rawMaterials/${productId}`);
       setProduct(response.data);
     } catch (error) {
       console.error('Error fetching product:', error);
@@ -41,26 +34,34 @@ const PaymentPage = () => {
   const handlePayment = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/orders', {
-        productId,
-        ...paymentDetails,
-      });
-      alert('Payment successful!');
-       navigate('/BuyProduct');
+      const orderData = {
+        rawMaterialId: productId,
+        name: paymentDetails.name,
+        cardDetails: {
+          cardNumber: paymentDetails.cardNumber,
+          expiryDate: paymentDetails.expiryDate,
+          cvv: paymentDetails.cvv,
+        },
+      };
+  
+      const response = await axios.post('http://localhost:4000/api/rorders', orderData);
+      alert(response.data.message); // Shows 'Payment successful!' message
+      navigate('/IndustryDashboard'); // Redirect after successful payment
     } catch (error) {
       console.error('Error processing payment:', error);
+      alert('Payment failed. Please try again.');
     }
   };
 
   const handleBackClick = () => {
-    navigate('/BuyProduct'); 
+    navigate(-1);
   };
 
   return (
     <div style={containerStyle}>
       <button style={backButtonStyle} onClick={handleBackClick}>Back</button>
       <h1 style={headingStyle}>Payment for {product?.name}</h1>
-      
+
       {product && (
         <div style={productDetailsStyle}>
           <h2>{product?.name}</h2>
@@ -70,65 +71,11 @@ const PaymentPage = () => {
       )}
 
       <form onSubmit={handlePayment} style={formStyle}>
-        {/* <input
-          type="text"
-          name="userName"
-          placeholder="User Name"
-          value={paymentDetails.userName}
-          onChange={handleChange}
-          style={inputStyle}
-          required
-        /> */}
-        {/* <input
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={paymentDetails.address}
-          onChange={handleChange}
-          style={inputStyle}
-          required
-        /> */}
         <input
           type="text"
           name="name"
           placeholder="Full Name"
           value={paymentDetails.name}
-          onChange={handleChange}
-          style={inputStyle}
-          required
-        />
-        <input
-          type="text"
-          name="houseName"
-          placeholder="House Name"
-          value={paymentDetails.houseName}
-          onChange={handleChange}
-          style={inputStyle}
-          required
-        />
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={paymentDetails.city}
-          onChange={handleChange}
-          style={inputStyle}
-          required
-        />
-        <input
-          type="text"
-          name="locality"
-          placeholder="Locality"
-          value={paymentDetails.locality}
-          onChange={handleChange}
-          style={inputStyle}
-          required
-        />
-        <input
-          type="text"
-          name="pincode"
-          placeholder="Pincode"
-          value={paymentDetails.pincode}
           onChange={handleChange}
           style={inputStyle}
           required
@@ -170,36 +117,39 @@ const PaymentPage = () => {
           required
         />
         <button type="submit" style={buttonStyle}>Pay</button>
-        {successMessage && <p style={successMessageStyle}>{successMessage}</p>}
       </form>
     </div>
   );
 };
 
-// Styles (no changes needed here)
 
 
 
 
-// Styles
+
+// CSS Styles
 const containerStyle = {
   padding: '20px',
   textAlign: 'center',
   maxWidth: '500px',
   margin: '0 auto',
+  backgroundColor: '#f4f7f6',
+  borderRadius: '8px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
 };
 
 const headingStyle = {
   marginBottom: '20px',
+  color: '#333',
 };
 
 const productDetailsStyle = {
   marginBottom: '20px',
   textAlign: 'left',
   padding: '10px',
-  border: '1px solid #ccc',
+  border: '1px solid #ddd',
   borderRadius: '5px',
-  backgroundColor: '#f9f9f9',
+  backgroundColor: '#fff',
 };
 
 const formStyle = {
@@ -214,20 +164,19 @@ const inputStyle = {
   width: '80%',
   borderRadius: '5px',
   border: '1px solid #ccc',
+  fontSize: '16px',
+  color: '#333',
 };
 
 const buttonStyle = {
-  padding: '10px 20px',
+  padding: '12px 25px',
   backgroundColor: '#4CAF50',
   color: '#fff',
   border: 'none',
   borderRadius: '5px',
   cursor: 'pointer',
-};
-
-const successMessageStyle = {
-  color: 'green',
-  fontWeight: 'bold',
+  fontSize: '16px',
+  width: '80%',
 };
 
 const backButtonStyle = {
@@ -239,7 +188,7 @@ const backButtonStyle = {
   color: 'white',
   border: 'none',
   borderRadius: '5px',
-  cursor: 'pointer'
+  cursor: 'pointer',
 };
 
-export default PaymentPage;
+export default RPaymentPage;

@@ -70,7 +70,7 @@ const StaffDashboard = () => {
       {/* Dashboard Cards */}
       <Container style={{ ...styles.container, marginTop: '100px' }}>
         <Row className="mb-4">
-          <Col lg={6} md={6} sm={12} className="mb-4">
+          {/* <Col lg={6} md={6} sm={12} className="mb-4">
             <Card
               className="text-center"
               style={styles.card}
@@ -78,14 +78,14 @@ const StaffDashboard = () => {
               onMouseOut={(e) => (e.currentTarget.style.boxShadow = styles.card.boxShadow)}
             >
               <Card.Body style={styles.cardBody}>
-                <Card.Title>Add New Staff</Card.Title>
-                <Card.Text>Manage staff details.</Card.Text>
-                <Button variant="primary" onClick={() => navigate('/Staffreg')}>
-                  Add Staff
+                <Card.Title>Add New Raw Materials</Card.Title>
+                <Card.Text>Add New Raw Materials.</Card.Text>
+                <Button variant="primary" onClick={() => navigate('/rawMaterials')}>
+                  Add Raw Materials
                 </Button>
               </Card.Body>
             </Card>
-          </Col>
+          </Col> */}
           <Col lg={6} md={6} sm={12} className="mb-4">
             <Card
               className="text-center"
@@ -102,10 +102,8 @@ const StaffDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
-        </Row>
-
-        <Row>
-          <Col lg={6} md={6} sm={12} className="mb-4">
+        
+          {/* <Col lg={6} md={6} sm={12} className="mb-4">
             <Card
               className="text-center"
               style={styles.card}
@@ -114,13 +112,13 @@ const StaffDashboard = () => {
             >
               <Card.Body style={styles.cardBody}>
                 <Card.Title>Product Details</Card.Title>
-                <Card.Text>View and manage product information.</Card.Text>
-                <Button variant="primary" onClick={() => navigate('/Products')}>
-                  View Products
+                <Card.Text>View and manage Raw Material information.</Card.Text>
+                <Button variant="primary" onClick={() => navigate('/editOrder')}>
+                  Edit Raw Matrial
                 </Button>
               </Card.Body>
             </Card>
-          </Col>
+          </Col> */}
           <Col lg={6} md={6} sm={12} className="mb-4">
             <Card
               className="text-center"
@@ -129,17 +127,15 @@ const StaffDashboard = () => {
               onMouseOut={(e) => (e.currentTarget.style.boxShadow = styles.card.boxShadow)}
             >
               <Card.Body style={styles.cardBody}>
-                <Card.Title>View Complaints</Card.Title>
-                <Card.Text>View complaints from companies.</Card.Text>
-                <Button variant="primary" onClick={() => navigate('/Complaints')}>
-                  View Complaints
+                <Card.Title>View Product Orders</Card.Title>
+                <Card.Text>View Orders from clients.</Card.Text>
+                <Button variant="primary" onClick={() => navigate('/orders')}>
+                  View Orders
                 </Button>
               </Card.Body>
             </Card>
           </Col>
-        </Row>
         
-        <Row>
           <Col lg={6} md={6} sm={12} className="mb-4">
             <Card
               className="text-center"
@@ -156,6 +152,23 @@ const StaffDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
+{/* 
+          <Col lg={6} md={6} sm={12} className="mb-4">
+            <Card
+              className="text-center"
+              style={styles.card}
+              onMouseOver={(e) => (e.currentTarget.style.boxShadow = styles.cardHover.boxShadow)}
+              onMouseOut={(e) => (e.currentTarget.style.boxShadow = styles.card.boxShadow)}
+            >
+              <Card.Body style={styles.cardBody}>
+                <Card.Title>Raw Matrials Order List</Card.Title>
+                <Card.Text>View Raw Matrials Order Detials.</Card.Text>
+                <Button variant="primary" onClick={() => navigate('/listOrders')}>
+                  Raw Matrial Orders
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col> */}
           </Row>
       </Container>
     </div>

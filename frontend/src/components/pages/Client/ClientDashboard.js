@@ -36,6 +36,10 @@ const ClientDashboard = () => {
     navigate('/BuyProduct');
   };
 
+  // const handleVieworders = () => {
+  //   navigate('/order-details');
+  // };
+
   return (
     <div style={backgroundStyle}>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -67,6 +71,7 @@ const ClientDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
+          
           <Col xs={12} md={6} lg={4}>
             <Card style={cardStyle}>
               <Card.Body>
@@ -80,7 +85,24 @@ const ClientDashboard = () => {
               </Card.Body>
             </Card>
           </Col>
-        </Row>
+        
+      
+        {/* <Col xs={12} md={6} lg={4}>
+            <Card style={cardStyle}>
+              <Card.Body>
+                <Card.Title>View Orders</Card.Title>
+                <Card.Text>
+                  View All Your Orders.     
+
+                </Card.Text>
+                <Button variant="primary" onClick={handleVieworders}>
+                  View Orders
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col> */}
+          </Row>
+        
       </Container>
     </div>
   );

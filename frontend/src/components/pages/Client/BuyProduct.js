@@ -25,7 +25,7 @@ const BuyProduct = () => {
   };
 
   const handleBackClick = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate('/ClientDashboard'); 
   };
 
   return (
