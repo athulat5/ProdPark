@@ -118,5 +118,5 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 Contact
 If you have any questions or feedback, please feel free to reach out:
 
-Email: your_email@example.com
-GitHub: yourusername
+Email: athulanil102@gmail.com
+GitHub: athulat5
