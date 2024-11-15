@@ -38,7 +38,7 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/yourusername/prodpark.git
+git clone https://github.com/athulat5/prodpark.git
 Navigate to the project directory:
 
 bash
